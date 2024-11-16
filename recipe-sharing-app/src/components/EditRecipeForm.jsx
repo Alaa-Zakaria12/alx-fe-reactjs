@@ -1,18 +1,27 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
-import { useRecipeStore } from './recipeStore';  // Update the path accordingly
+// EditRecipeForm.jsx
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useRecipeStore } from './recipeStore';
 
-const EditRecipeForm = ({ recipe }) => {
-  const [title, setTitle] = useState(recipe.title);
-  const [description, setDescription] = useState(recipe.description);
+const EditRecipeForm = () => {
+  const { recipeId } = useParams();
+  const recipe = useRecipeStore((state) =>
+    state.recipes.find((recipe) => recipe.id === parseInt(recipeId))
+  );
+  const [title, setTitle] = useState(recipe?.title || '');
+  const [description, setDescription] = useState(recipe?.description || '');
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
+  const navigate = useNavigate();
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent page reload
-    updateRecipe({ ...recipe, title, description }); // Update the recipe
-    alert("Recipe updated successfully!"); // Confirmation
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateRecipe({ ...recipe, title, description });
+    navigate(`/recipe/${recipeId}`);  // Redirect to updated recipe page
   };
+
+  if (!recipe) {
+    return <div>Recipe not found</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -35,15 +44,6 @@ const EditRecipeForm = ({ recipe }) => {
       <button type="submit">Update Recipe</button>
     </form>
   );
-};
-
-// Prop types for validation
-EditRecipeForm.propTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default EditRecipeForm;

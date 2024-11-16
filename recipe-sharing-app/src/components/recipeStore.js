@@ -1,8 +1,9 @@
-import create from 'zustand'; 
-const useRecipeStore = create((set) => ({
+// recipeStore.js
+import create from 'zustand';
+
+export const useRecipeStore = create((set) => ({
   recipes: [],
   addRecipe: (newRecipe) => set((state) => ({ recipes: [...state.recipes, newRecipe] })),
-  setRecipes: (recipes) => set({ recipes }),
   updateRecipe: (updatedRecipe) =>
     set((state) => ({
       recipes: state.recipes.map((recipe) =>
@@ -14,5 +15,3 @@ const useRecipeStore = create((set) => ({
       recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
     })),
 }));
-
-export { useRecipeStore };

@@ -1,11 +1,10 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';  // Make sure you have your styles here if applicable
+import { BrowserRouter } from 'react-router-dom'; // For routing
+import App from './App'; // Your main App component
 
-// Use ReactDOM.createRoot for rendering in React 18 and later
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
     <App />
-  </React.StrictMode>
+  </BrowserRouter>
 );

@@ -1,29 +1,28 @@
-// RecipeDetails
-import { useRecipeStore } from './recipeStore';  // Update path if needed
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import DeleteRecipeButton from './DeleteRecipeButton';  // Import the DeleteRecipeButton
+// RecipeDetails.jsx
+import { useParams } from 'react-router-dom';
+import { useRecipeStore } from './recipeStore';
+import DeleteRecipeButton from './DeleteRecipeButton'; // Add the import here
+import { Link } from 'react-router-dom'; // Import Link here
 
-const RecipeDetails = ({ recipeId }) => {
-  const recipe = useRecipeStore((state) => state.recipes.find((recipe) => recipe.id === recipeId));
-  const navigate = useNavigate();
+const RecipeDetails = () => {
+  const { recipeId } = useParams(); // Get the recipeId from URL params
+  const recipe = useRecipeStore((state) =>
+    state.recipes.find((recipe) => recipe.id === parseInt(recipeId))
+  );
 
   if (!recipe) {
-    return <p>Recipe not found.</p>;
+    return <div>Recipe not found</div>;
   }
 
   return (
     <div>
       <h1>{recipe.title}</h1>
       <p>{recipe.description}</p>
-      <DeleteRecipeButton recipeId={recipe.id} />  {/* Add the delete button */}
-      <button onClick={() => navigate(`/edit-recipe/${recipe.id}`)}>Edit Recipe</button>
+      {/* Edit and Delete buttons */}
+      <Link to={`/edit/${recipeId}`}>Edit Recipe</Link>
+      <DeleteRecipeButton recipeId={recipeId} />
     </div>
   );
-};
-
-RecipeDetails.propTypes = {
-  recipeId: PropTypes.number.isRequired,
 };
 
 export default RecipeDetails;
