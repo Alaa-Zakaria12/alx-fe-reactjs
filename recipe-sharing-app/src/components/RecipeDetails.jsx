@@ -1,3 +1,4 @@
+// RecipeDetails
 import { useRecipeStore } from './recipeStore';  // Update path if needed
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
