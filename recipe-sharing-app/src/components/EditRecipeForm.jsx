@@ -1,22 +1,25 @@
-// EditRecipeForm.jsx
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useRecipeStore } from './recipeStore';
+import { useRecipeStore } from './recipeStore'; // Adjust path if needed
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const EditRecipeForm = () => {
-  const { recipeId } = useParams();
+const EditRecipeForm = ({ recipeId }) => {
   const recipe = useRecipeStore((state) =>
     state.recipes.find((recipe) => recipe.id === parseInt(recipeId))
   );
+
   const [title, setTitle] = useState(recipe?.title || '');
   const [description, setDescription] = useState(recipe?.description || '');
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
     updateRecipe({ ...recipe, title, description });
-    navigate(`/recipe/${recipeId}`);  // Redirect to updated recipe page
+
+    alert('Recipe updated successfully!');
+    navigate(`/recipe/${recipeId}`); // Navigate to the updated recipe page
   };
 
   if (!recipe) {
@@ -44,6 +47,11 @@ const EditRecipeForm = () => {
       <button type="submit">Update Recipe</button>
     </form>
   );
+};
+
+// Add PropTypes for validation
+EditRecipeForm.propTypes = {
+  recipeId: PropTypes.string.isRequired, // Assuming recipeId is a string from URL params
 };
 
 export default EditRecipeForm;
