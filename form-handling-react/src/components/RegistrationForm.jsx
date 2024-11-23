@@ -1,12 +1,11 @@
 import { useState } from "react";
+
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
-
-  const [errors, setErrors] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,10 +14,9 @@ const RegistrationForm = () => {
 
   const validateForm = () => {
     if (!formData.username || !formData.email || !formData.password) {
-      setErrors("All fields are required.");
+      alert("All fields are required.");
       return false;
     }
-    setErrors("");
     return true;
   };
 
@@ -26,21 +24,18 @@ const RegistrationForm = () => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Form Submitted:", formData);
-      // Simulate API call
-      alert("User registered successfully!");
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Register</h2>
-      {errors && <p style={{ color: "red" }}>{errors}</p>}
       <div>
         <label>Username:</label>
         <input
           type="text"
           name="username"
-          value={formData.username}
+          value={formData.username} // Ensure this is present
           onChange={handleChange}
         />
       </div>
@@ -49,7 +44,7 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={formData.email}
+          value={formData.email} // Ensure this is present
           onChange={handleChange}
         />
       </div>
@@ -58,7 +53,7 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={formData.password}
+          value={formData.password} // Ensure this is present
           onChange={handleChange}
         />
       </div>
