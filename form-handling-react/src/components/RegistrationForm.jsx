@@ -8,6 +8,9 @@ const RegistrationForm = () => {
     password: "",
   });
 
+  // Initialize the errors state
+  const [errors, setErrors] = useState("");
+
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,10 +19,11 @@ const RegistrationForm = () => {
 
   // Validate form data before submitting
   const validateForm = () => {
-    if (!formData.username || !formData.email || !formData.password) {
-      alert("All fields are required.");
+    if (!username || !email || !password) {  // Check for empty fields in the required format
+      setErrors("All fields are required.");
       return false;
     }
+    setErrors("");  // Clear errors if validation passes
     return true;
   };
 
@@ -35,12 +39,13 @@ const RegistrationForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Register</h2>
+      {errors && <p style={{ color: "red" }}>{errors}</p>}
       <div>
         <label>Username:</label>
         <input
           type="text"
           name="username"
-          value={formData.username}  // This matches 'value={username}' exactly
+          value={username}  // Correct value binding
           onChange={handleChange}
         />
       </div>
@@ -49,7 +54,7 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={formData.email}  // This matches 'value={email}' exactly
+          value={email}  // Correct value binding
           onChange={handleChange}
         />
       </div>
@@ -58,7 +63,7 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={formData.password}  // This matches 'value={password}' exactly
+          value={password}  // Correct value binding
           onChange={handleChange}
         />
       </div>
