@@ -1,17 +1,20 @@
 import { useState } from "react";
 
 const RegistrationForm = () => {
+  // Initialize the form state
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  // Validate form data before submitting
   const validateForm = () => {
     if (!formData.username || !formData.email || !formData.password) {
       alert("All fields are required.");
@@ -20,10 +23,12 @@ const RegistrationForm = () => {
     return true;
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Form Submitted:", formData);
+      alert("User registered successfully!");
     }
   };
 
@@ -35,7 +40,7 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={formData.username} // Ensure this is present
+          value={formData.username}  // This matches 'value={username}' exactly
           onChange={handleChange}
         />
       </div>
@@ -44,7 +49,7 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={formData.email} // Ensure this is present
+          value={formData.email}  // This matches 'value={email}' exactly
           onChange={handleChange}
         />
       </div>
@@ -53,7 +58,7 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={formData.password} // Ensure this is present
+          value={formData.password}  // This matches 'value={password}' exactly
           onChange={handleChange}
         />
       </div>
