@@ -9,13 +9,13 @@ const fetchPosts = async () => {
 
 const PostsComponent = () => {
   // useQuery hook with refetchOnWindowFocus and keepPreviousData options
-  const { data, error, isLoading, refetch } = useQuery('posts', fetchPosts, {
+  const { data, error, isLoading, isError, refetch } = useQuery('posts', fetchPosts, {
     refetchOnWindowFocus: true,  // Refetch data when the window is focused again
     keepPreviousData: true,      // Keep previous data while fetching new data
   });
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching posts</div>;
+  if (isError) return <div>Error fetching posts</div>;
 
   return (
     <div>
