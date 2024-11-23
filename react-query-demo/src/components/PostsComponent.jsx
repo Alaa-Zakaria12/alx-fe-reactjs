@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { useQuery } from 'react-query';
 
 // Function to fetch posts from the API
@@ -8,9 +8,9 @@ const fetchPosts = async () => {
 };
 
 const PostsComponent = () => {
-  // useQuery hook with the necessary options
+  // useQuery hook with refetchOnWindowFocus and keepPreviousData options
   const { data, error, isLoading, refetch } = useQuery('posts', fetchPosts, {
-    refetchOnWindowFocus: true,  // Ensure refetching when window is focused again
+    refetchOnWindowFocus: true,  // Refetch data when the window is focused again
     keepPreviousData: true,      // Keep previous data while fetching new data
   });
 
