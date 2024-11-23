@@ -19,8 +19,16 @@ const RegistrationForm = () => {
 
   // Validate form data before submitting
   const validateForm = () => {
-    if (!username || !email || !password) {  // Check for empty fields in the required format
-      setErrors("All fields are required.");
+    if (!username) {  // Check for empty username
+      setErrors("Username is required.");
+      return false;
+    }
+    if (!email) {  // Check for empty email
+      setErrors("Email is required.");
+      return false;
+    }
+    if (!password) {  // Check for empty password
+      setErrors("Password is required.");
       return false;
     }
     setErrors("");  // Clear errors if validation passes
