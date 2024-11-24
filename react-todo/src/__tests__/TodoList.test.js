@@ -2,6 +2,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import TodoList from '../components/TodoList';  // Make sure the path is correct
 import '@testing-library/jest-dom'; // for the "toBeInTheDocument" matcher
 
+import { render, screen } from '@testing-library/react';
+import TodoList from '../components/TodoList'; // Adjust path as needed
+
+describe('TodoList Component', () => {
+  test('renders without crashing', () => {
+    render(<TodoList />);
+    expect(screen.getByText(/add todo/i)).toBeInTheDocument();
+  });
+});
 describe('TodoList Component', () => {
 
   // Initial Render Test
@@ -55,3 +64,5 @@ describe('TodoList Component', () => {
     expect(todoItem).not.toBeInTheDocument();
   });
 });
+
+

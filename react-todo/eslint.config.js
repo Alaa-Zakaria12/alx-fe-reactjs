@@ -46,7 +46,7 @@ export default [
         'eslint:recommended',
       ],
       // other ESLint settings here
-    };
+    },
     
   },
 ]
