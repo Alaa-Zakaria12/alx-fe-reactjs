@@ -3,11 +3,14 @@ import axios from 'axios';
 // Base URL for GitHub API
 const BASE_URL = 'https://api.github.com';
 
-// Create an instance of Axios with optional authentication
+// Get API key from environment variables
+const API_KEY = import.meta.env.VITE_GITHUB_API_KEY || ''; // Default to an empty string if not defined
+
+// Create an instance of Axios
 const githubApi = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Authorization: `token ${process.env.REACT_APP_GITHUB_API_KEY || ''}`, // Use the key if available
+    Authorization: API_KEY ? `token ${API_KEY}` : undefined, // Include token only if API_KEY is defined
   },
 });
 
