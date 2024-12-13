@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchAdvancedSearchResults } from '../services/githubService';
+import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +17,7 @@ const Search = () => {
     setResults([]);
     try {
       const query = { username, location, minRepos, page };
-      const data = await fetchAdvancedSearchResults(query);
+      const data = await fetchUserData(query);
       setResults(data.items || []);
     } catch (err) {
       setError('No results found or an error occurred.');
