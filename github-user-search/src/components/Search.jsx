@@ -20,7 +20,7 @@ const Search = () => {
       const data = await fetchUserData(query);
       setResults(data.items || []);
     } catch (err) {
-      setError('No results found or an error occurred.');
+      setError('Looks like we cant find the user');
     } finally {
       setLoading(false);
     }
